@@ -8,7 +8,9 @@
       <v-img
           max-width="25"
           max-height="25"
-          src='./assets/Initial-kalgory-logo.svg'>
+          src='./assets/Initial-kalgory-logo.svg'
+          @click="$router.push('/')"
+      >
       </v-img>
     </v-app-bar>
     <v-navigation-drawer
@@ -48,9 +50,9 @@ export default {
         icon: 'mdi-chat',
         to: '/chat'
       }, {
-        title: 'Grid-test',
+        title: 'Qna',
         icon: 'mdi-account-question',
-        to: '/grid-test'
+        to: '/qna'
       }
       ]
     }

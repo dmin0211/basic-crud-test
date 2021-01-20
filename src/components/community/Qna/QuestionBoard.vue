@@ -21,18 +21,39 @@
               ></v-text-field>
             </v-col>
           </v-row>
+
+          <v-row justify="end">
+            <v-btn icon @click="$router.push({name:'qna-create-board'})">
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
+          </v-row>
         </v-container>
       </template>
       <template v-slot:default="props">
-        <v-data-table
-            :headers="headers"
-            :items="props.items"
-            class="elevation-1"
-            item-key="qnaContent"
-            hide-default-footer
-            :items-per-page.sync="props.itemsPerPage"
-        >
-        </v-data-table>
+        <v-simple-table>
+          <thead>
+            <tr>
+              <th class="text-left"
+                  v-for="head in headers"
+                  :key="head"
+              >{{head}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+                v-for="(item,index) in props.items"
+                :key="index"
+                @click="$router.push({name:'qna-body',params:{id:item.id, qnaBody:item}})"
+            >
+              <td>{{item.title}}</td>
+              <td>{{item.clicks}}</td>
+              <td>{{item.comments}}</td>
+              <td>{{item.user}}</td>
+              <td>{{item.upload}}</td>
+            </tr>
+            </tbody>
+
+        </v-simple-table>
       </template>
       <template v-slot:footer>
         <v-row class="mt-2" align="center" justify="center">
@@ -67,7 +88,7 @@
             <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
           <v-btn fab color="#7c4def" class="ml-1 mr-3" elevation="0" dark
-                @click="nextPage"
+                 @click="nextPage"
           >
             <v-icon>mdi-chevron-right</v-icon>
           </v-btn>
@@ -78,43 +99,26 @@
 </template>
 
 <script>
+import {qnaRead as readQna} from './qnafiresotre'
+
 export default {
   name: "QuestionBoard.vue",
   data() {
     return {
       question: '',
-      page:1,
+      page: 1,
       itemsPerPage: 10,
       itemsPerArray: [5, 10, 25],
       // nameRules: [
       //   v => !!v || 'Name is required',
       //   v => v.length <= 10 || 'Name must be less than 10 characters',
       // ],
-      qnaField: [
-        {
-          qnaContent: 'kalgory의 이름 뜻이 뭔가요?',
-          clicks: 203,
-          comments: 2,
-        },
-        {
-          qnaContent: 'algorithm은 어떻게 공부하나요?',
-          clicks: 13,
-          comments: 5,
-        },
-        {
-          qnaContent: '나는 병신인가?',
-          clicks: 102,
-          comments: 1,
-        },
-      ],
-      headers: [
-        {text: 'Contents', value: 'qnaContent', align: 'start', sortable: false},
-        {text: 'Clicks', value: 'clicks'},
-        {text: 'Comments', value: 'comments'}
-      ]
+      qnaField: [],
+      headers: ['ContentTitles','Clicks','Comments','Users','UploadTimes']
     }
   },
   created() {
+    readQna(this.qnaField)
   },
   methods: {
     changePerPage(number) {
@@ -130,7 +134,8 @@ export default {
   computed: {
     numberOfPages() {
       return Math.ceil(this.qnaField.length / this.itemsPerPage)
-    }
+    },
+
   }
 }
 

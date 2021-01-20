@@ -4,9 +4,11 @@
       <v-list-item v-for="(item,index) in items"
                    :key="index"
                    no-action
-                   @click="gotoView(item)"
+                   router :to="{name:item.title}" exact
       >
-        <v-list-item-icon><v-icon>{{ item.icon }}</v-icon></v-list-item-icon>
+        <v-list-item-icon>
+          <v-icon>{{ item.icon }}</v-icon>
+        </v-list-item-icon>
         <v-list-item-title class="white--text" v-text="item.title"></v-list-item-title>
       </v-list-item>
     </v-list>
@@ -20,12 +22,7 @@ export default {
   created() {
     console.log(this.items)
   },
-  methods:{
-    gotoView(item){
-      console.log(item.title)
-    },
 
-  }
 }
 </script>
 

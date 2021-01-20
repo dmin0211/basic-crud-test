@@ -1,7 +1,7 @@
 <template>
- <v-content>
-   <h1>hello world page</h1>
- </v-content>
+  <v-main>
+      <h1>hello Kalgory Home page</h1>
+  </v-main>
 </template>
 
 <script>
