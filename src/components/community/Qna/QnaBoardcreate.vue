@@ -68,7 +68,7 @@ name: "QnaBoardcreate",
   methods:{
     createdQna(){
       createQna(this.newData)
-      this.$router.push('/qna')
+      this.$router.push({name:'Qna'})
     }
   }
 }

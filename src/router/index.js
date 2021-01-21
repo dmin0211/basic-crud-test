@@ -15,6 +15,7 @@ const QnaBoardCreate = () => import('../components/community/Qna/QnaBoardCreate'
 
 const QnaBody = () => import('../components/community/Qna/QnaBody')
 
+const Vuex = () => import('@/components/community/Vuex-Test/testBody')
 export default new Router({
     mode: 'history',
     base: process.env.BASE,
@@ -30,12 +31,18 @@ export default new Router({
             component: Chat
         },
         {
+            path: '/vuex',
+            name: 'Vuex',
+            component: Vuex
+        },
+        {
             path: '/qna',
             name: 'Qna',
+            redirect: {name:'qna-board'},
             component: QuestionMain,
             children: [
                 {
-                    path: '',
+                    path: '/',
                     name: 'qna-board',
                     component: Question
                 },

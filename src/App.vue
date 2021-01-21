@@ -53,7 +53,11 @@ export default {
         title: 'Qna',
         icon: 'mdi-account-question',
         to: '/qna'
-      }
+      }, {
+        title: 'Vuex',
+        icon: 'mdi-check',
+        to: '/vuex'
+      },
       ]
     }
   },

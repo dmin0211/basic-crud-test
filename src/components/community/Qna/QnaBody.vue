@@ -4,7 +4,7 @@
       <v-card-title v-text="currentQnaData.title"></v-card-title>
       <v-card-subtitle v-text="currentQnaData.user"></v-card-subtitle>
       <v-card-text v-text="currentQnaData.Content"></v-card-text>
-      <v-card-actions><v-btn @click="$router.push('/qna')"></v-btn></v-card-actions>
+      <v-card-actions><v-btn @click="$router.push({name:'Qna'})"></v-btn></v-card-actions>
     </v-card>
   </v-container>
 </template>
