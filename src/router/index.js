@@ -7,11 +7,13 @@ const Chat = () => import('../components/community/chatSite')
 
 const Home = () => import('../components/Home')
 
+const QuestionMain = () => import('../components/community/Qna/Qnamain')
+
 const Question = () => import('../components/community/Qna/QuestionBoard')
 
 const QnaBoardCreate = () => import('../components/community/Qna/QnaBoardCreate')
 
-const QnaBody =()=>import('../components/community/Qna/QnaBody')
+const QnaBody = () => import('../components/community/Qna/QnaBody')
 
 export default new Router({
     mode: 'history',
@@ -30,19 +32,26 @@ export default new Router({
         {
             path: '/qna',
             name: 'Qna',
-            component: Question
+            component: QuestionMain,
+            children: [
+                {
+                    path: '',
+                    name: 'qna-board',
+                    component: Question
+                },
+                {
+                    path: 'create',
+                    name: 'qna-create-board',
+                    component: QnaBoardCreate
+                },
+                {
+                    path: ':id',
+                    name: 'qna-body',
+                    props: {qnaBody: true},
+                    component: QnaBody
+                }
+            ]
         },
-        {
-            path: '/qna/create',
-            name: 'qna-create-board',
-            component: QnaBoardCreate
-        },
-        {
-            path: '/qna/:id',
-            name: 'qna-body',
-            props: { qnaBody:true},
-            component: QnaBody
-        }
 
     ],
 })
