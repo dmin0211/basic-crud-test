@@ -14,7 +14,7 @@ import {EventBus} from "@/main";
 
 export default {
 name: "DataRead",
-  mounted() {
+  created() {
     EventBus.$on('newData', data=>{
       this.$store.state.textData.push(data)
       console.log('newData')
